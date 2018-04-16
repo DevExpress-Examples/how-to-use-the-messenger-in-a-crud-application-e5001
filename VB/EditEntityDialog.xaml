@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="DXSample.EditEntityDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DXSample"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:DialogViewModel/>
+    </UserControl.DataContext>
+    <DockPanel>
+        <dxmvvm:Interaction.Behaviors>
+            <dxmvvm:CurrentWindowService/>
+        </dxmvvm:Interaction.Behaviors>
+        <dxb:BarManager DockPanel.Dock="Top">
+            <dxb:BarManager.Items>
+                <dxb:BarButtonItem Name="saveItem" Content="Save" Command="{Binding SaveCommand}"/>
+            </dxb:BarManager.Items>
+            <dxb:BarManager.Bars>
+                <dxb:Bar IsMainMenu="True">
+                    <dxb:BarButtonItemLink BarItemName="saveItem"/>
+                </dxb:Bar>
+            </dxb:BarManager.Bars>
+        </dxb:BarManager>
+        <dxprg:PropertyGridControl SelectedObject="{Binding Entity}" ShowCategories="False" Grid.Row="1">
+            <dxprg:PropertyDefinition PostOnEditValueChanged="True"/>
+        </dxprg:PropertyGridControl>
+    </DockPanel>
+</UserControl>

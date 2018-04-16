@@ -1,0 +1,47 @@
+﻿<dx:DXWindow x:Class="DXSample.MainWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+             xmlns:local="clr-namespace:DXSample"
+             Title="MainWindow"
+             Height="500"
+             Width="1000">
+    <dx:DXWindow.DataContext>
+        <local:MainViewModel/>
+    </dx:DXWindow.DataContext>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:WindowedDocumentUIService WindowStartupLocation="CenterOwner">
+            <dx:WindowedDocumentUIService.WindowStyle>
+                <Style TargetType="Window">
+                    <Setter Property="Width" Value="500"/>
+                    <Setter Property="Height" Value="500"/>
+                </Style>
+            </dx:WindowedDocumentUIService.WindowStyle>
+        </dx:WindowedDocumentUIService>
+    </dxmvvm:Interaction.Behaviors>
+    <DockPanel>
+        <dxb:BarManager DockPanel.Dock="Top">
+            <dxb:BarManager.Items>
+                <dxb:BarButtonItem Name="editItem" Content="Edit" Command="{Binding EditCommand}"/>
+            </dxb:BarManager.Items>
+            <dxb:BarManager.Bars>
+                <dxb:Bar IsMainMenu="True">
+                    <dxb:BarButtonItemLink BarItemName="editItem"/>
+                </dxb:Bar>
+            </dxb:BarManager.Bars>
+        </dxb:BarManager>
+        <dxg:GridControl ItemsSource="{Binding Entities}" CurrentItem="{Binding SelectedEntity}" AutoGenerateColumns="AddNew">
+            <dxg:GridControl.View>
+                <dxg:TableView NavigationStyle="Row" AutoWidth="True">
+                    <dxmvvm:Interaction.Triggers>
+                        <dxmvvm:EventToCommand EventName="RowDoubleClick" Command="{Binding EditCommand}"/>
+                    </dxmvvm:Interaction.Triggers>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</dx:DXWindow>
