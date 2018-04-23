@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="MessengerExample.Views.EmployeeCollectionView"
+xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+xmlns:viewmodel="clr-namespace:MessengerExample.ViewModels"
+mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
+DataContext="{dxmvvm:ViewModelSource viewmodel:EmployeeCollectionViewModel}">
+
+
+    <DockPanel>
+        <dxr:RibbonControl RibbonStyle="Office2010" DockPanel.Dock="Top">
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="Home">
+                    <dxr:RibbonPageGroup >
+                        <dxb:BarButtonItem 
+                            x:Name="AddCommandBarButtonItem" Content="Add" Command="{Binding AddCommand}"
+                            LargeGlyph="{dx:DXImage Image=Add_32x32.png}" 
+                            Glyph="{dx:DXImage Image=Add_16x16.png}"/>
+                        <dxb:BarButtonItem 
+                            x:Name="EditCommandBarButtonItem" Content="Edit" Command="{Binding EditCommand}"  CommandParameter="{Binding CurrentItem, ElementName=gridControl}"
+                            LargeGlyph="{dx:DXImage Image=Edit_32x32.png}" 
+                            Glyph="{dx:DXImage Image=Edit_16x16.png}"/>
+                        <dxb:BarButtonItem 
+                            x:Name="DeleteCommandBarButtonItem" Content="Delete" Command="{Binding DeleteCommand}"  CommandParameter="{Binding CurrentItem, ElementName=gridControl}"
+                            LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" 
+                            Glyph="{dx:DXImage Image=Delete_16x16.png}"/>
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Print and Export">
+                        <dxb:BarButtonItem 
+                            x:Name="PrintPreviewBarButtonItem" Content="Print Preview" Command="{Binding TableViewCommands.ShowPrintPreviewDialog, ElementName=tableView}" 
+                            Glyph="{dx:DXImage Image=preview_16x16.png}" 
+                            LargeGlyph="{dx:DXImage Image=preview_32x32.png}"/>
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+        <dxr:RibbonStatusBarControl DockPanel.Dock="Bottom"/>
+        <Grid>
+            <dxg:GridControl Name="gridControl" ItemsSource="{Binding Employees}" ShowBorder="False" >
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="FirstName" />
+                    <dxg:GridColumn FieldName="LastName" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.TotalSummary>
+                    <dxg:GridSummaryItem SummaryType="Count" Alignment="Right"/>
+                </dxg:GridControl.TotalSummary>
+                <dxg:GridControl.GroupSummary>
+                    <dxg:GridSummaryItem SummaryType="Count"/>
+                </dxg:GridControl.GroupSummary>
+                <dxg:GridControl.View>
+                    <dxg:TableView Name="tableView" AllowEditing="False" ShowFixedTotalSummary="True" AllowPerPixelScrolling="True">
+                        <dxg:TableView.RowCellMenuCustomizations>
+                            <dxb:BarButtonItem 
+                                Content="Add" Command="{Binding View.DataContext.AddCommand}"  
+                                Glyph="{dx:DXImage Image=Add_16x16.png}" />
+                            <dxb:BarButtonItem 
+                                Content="Edit" Command="{Binding View.DataContext.EditCommand}"  
+                                Glyph="{dx:DXImage Image=Edit_16x16.png}" />
+                            <dxb:BarButtonItem
+                                Content="Delete" Command="{Binding View.DataContext.DeleteCommand}" 
+                                Glyph="{dx:DXImage Image=Delete_16x16.png}" />
+                        </dxg:TableView.RowCellMenuCustomizations>
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </Grid>
+    </DockPanel>
+</UserControl>
+    
+    
+    
