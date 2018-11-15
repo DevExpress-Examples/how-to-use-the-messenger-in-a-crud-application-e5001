@@ -1,3 +1,11 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [EditEntityDialog.xaml](./CS/EditEntityDialog.xaml) (VB: [EditEntityDialog.xaml](./VB/EditEntityDialog.xaml))
+* [MainWindow.xaml](./CS/MainWindow.xaml) (VB: [MainWindow.xaml](./VB/MainWindow.xaml))
+* **[DialogViewModel.cs](./CS/ViewModel/DialogViewModel.cs) (VB: [DialogViewModel.vb](./VB/ViewModel/DialogViewModel.vb))**
+* [MainViewModel.cs](./CS/ViewModel/MainViewModel.cs) (VB: [MainViewModel.vb](./VB/ViewModel/MainViewModel.vb))
+<!-- default file list end -->
 # How to use the Messenger in a CRUD application
 
 
